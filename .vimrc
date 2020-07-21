@@ -1,7 +1,7 @@
 " Comments in Vimscript start with a `"`.
 
 " If you open this file in Vim, it'll be syntax highlighted for you.
-
+colorscheme pablo
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
 " configuration option turns out not to be necessary for the file named
@@ -100,5 +100,17 @@ let python_highlight_all = 1
 nmap <Leader>k :0read ~/.vim/templates/kickstart.cpp<CR>:48<CR>
 nmap <Leader>s :0read ~/.vim/templates/cp.cpp<CR>:42<CR>
 
+" save, compile for debugging for cpp files on \g
+autocmd FileType cpp nmap <Leader>g :w<CR>:!g++ -std=c++17 -g %:p<CR>
+
 " save, compile, and save_quit for cpp files on \c
 autocmd FileType cpp nmap <Leader>c :w<CR>:!g++ -std=c++17 -o %<  %<CR>:wq<CR>
+
+" map td for running :termdebug on a.out for cpp files
+autocmd FileType cpp nmap <Leader>td :Termdebug a.out<CR>
+
+" package add Termdebug on start
+autocmd FileType cpp :packadd termdebug
+
+" set debugger window split to vertical by default
+autocmd FileType cpp let g:termdebug_wide=1
